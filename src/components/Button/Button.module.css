@@ -1,0 +1,31 @@
+.button {
+  border-radius: 200px;
+  padding: 16px 60px;
+  width: 166px;
+  height: 56px;
+
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  border: none;
+
+  background-color: var(--button);
+
+  &:hover {
+    background-color: var(--button-hover);
+  }
+}
+
+/* .loadMoreBtn {
+  color: var(--main);
+  padding: 16px 32px;
+  width: 145px;
+  border: 1px solid var(--gray-light);
+
+  &:hover {
+    border: 1px solid var(--button-hover);
+  }
+} */

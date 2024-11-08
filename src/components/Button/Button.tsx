@@ -1,9 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
 import css from './Button.module.css';
 import clsx from 'clsx';
 
-interface BtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: ReactNode;
+interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
   newClassName?: string;
 }
 

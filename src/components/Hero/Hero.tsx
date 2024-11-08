@@ -1,5 +1,5 @@
+import LinkButton from '../LinkButton/LinkButton';
 import css from './Hero.module.css';
-import Button from '../Button/Button';
 
 const Hero = () => {
   return (
@@ -7,10 +7,9 @@ const Hero = () => {
       <div className={css.titleWrap}>
         <h1>Campers of your dreams</h1>
         <h2>You can find everything you want in our catalog</h2>
-
-        <Button newClassName={css.heroBtn} onClick={() => alert('hello')}>
+        <LinkButton link='/catalog' newClassName={css.heroLink}>
           View Now
-        </Button>
+        </LinkButton>
       </div>
     </div>
   );

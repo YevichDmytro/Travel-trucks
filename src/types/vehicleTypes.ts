@@ -10,31 +10,31 @@ export type reviews = {
 };
 
 export type Vehicle = {
+  id: string;
+  name: string;
+  description: string;
+  location: string;
+  form: string;
+  engine: string;
   AC: boolean;
   TV: boolean;
-  bathroom: boolean;
-  consumption: string;
-  description: string;
-  engine: string;
-  form: string;
-  gallery: gallery[];
-  gas: boolean;
-  height: string;
-  id: string;
-  kitchen: boolean;
-  length: string;
-  location: string;
-  microwave: boolean;
-  name: string;
-  price: number;
-  radio: boolean;
-  rating: number;
-  refrigerator: boolean;
-  reviews: reviews[];
-  tank: string;
-  transmission: string;
   water: boolean;
+  bathroom: boolean;
+  kitchen: boolean;
+  refrigerator: boolean;
+  microwave: boolean;
+  gas: boolean;
+  radio: boolean;
+  consumption: string;
+  transmission: string;
+  tank: string;
   width: string;
+  height: string;
+  length: string;
+  price: number;
+  rating: number;
+  gallery: gallery[];
+  reviews: reviews[];
 };
 
 export type VehiclesState = {

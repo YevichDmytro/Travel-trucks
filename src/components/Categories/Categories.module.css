@@ -2,3 +2,24 @@
   fill: white;
   stroke: black;
 }
+
+.categoryList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category {
+  border-radius: 100px;
+  padding: 12px 18px;
+  background: var(--badges);
+  mix-blend-mode: multiply;
+
+  height: 48px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 8px;
+  width: fit-content;
+}

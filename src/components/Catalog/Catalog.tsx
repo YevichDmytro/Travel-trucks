@@ -1,11 +1,20 @@
-// import css from './Catalog.module.css';
+import { useSelector } from 'react-redux';
+import { selectVehicles } from '../../redux/selectors';
 import CatalogItem from './CatalogItem/CatalogItem';
+import { Vehicle } from '../../types/vehicleTypes';
+// import css from './Catalog.module.css';
 
 const Catalog = () => {
+  const visibleItems = useSelector(selectVehicles);
+
   return (
-    <div>
-      <CatalogItem />
-    </div>
+    <>
+      <ul>
+        {visibleItems.map((item: Vehicle) => (
+          <CatalogItem item={item} key={item.id} />
+        ))}
+      </ul>
+    </>
   );
 };
 

@@ -1,0 +1,73 @@
+.catalogCard {
+  max-width: 888px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.cardImg {
+  width: 292px;
+  height: 320px;
+  object-fit: contain;
+}
+
+.cardContent {
+  flex-grow: 1;
+}
+
+.cardTitle {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.cardTitleWrap {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.cardTitleWrap > h2,
+.cardTitleWrap > p {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+  color: var(--main);
+}
+
+.cardInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.cardInfo > p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cardDescription,
+.cardInfo > p {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--main);
+}
+
+.cardDescription {
+  color: var(--text);
+  display: block;
+  width: 525px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 24px;
+}
+
+.showMoreLink {
+  padding: 16px 40px;
+}

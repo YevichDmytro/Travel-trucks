@@ -1,31 +1,27 @@
-// import axios from 'axios';
-// import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import { lazy, Suspense } from 'react';
+import { useDispatch } from 'react-redux';
 
-const Layout = lazy(() => import('../Layout/Layout'));
-const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
-const CatalogPage = lazy(() => import('../../pages/CatalogPage/CatalogPage'));
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.js';
+
+import { fetchAll } from '../../redux/operations.js';
+import { AppDispatch } from '../../redux/store.js';
+
+const Layout = lazy(() => import('../Layout/Layout.js'));
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage.js'));
+const CatalogPage = lazy(
+  () => import('../../pages/CatalogPage/CatalogPage.js')
+);
 const IndividualCamperPage = lazy(
-  () => import('../../pages/IndividualCamperPage/IndividualCamperPage')
+  () => import('../../pages/IndividualCamperPage/IndividualCamperPage.js')
 );
 
 const App = () => {
-  // useEffect(() => {
-  //   const func = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         'https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers'
-  //       );
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  const dispatch = useDispatch<AppDispatch>();
 
-  //   func();
-  // }, []);
+  useEffect(() => {
+    dispatch(fetchAll());
+  }, [dispatch]);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>

@@ -1,11 +1,12 @@
-type gallery = {
-  url: string;
-  alt?: string;
+export type gallery = {
+  original: string;
+  thumb: string;
 };
-type reviews = {
-  userId: string;
+
+export type reviews = {
   comment: string;
-  rating: number;
+  reviewer_name: string;
+  reviewer_rating: number;
 };
 
 export type Vehicle = {
@@ -43,7 +44,11 @@ export type VehiclesState = {
   error: string | null;
 };
 
+export type VehicleSelectorType = {
+  vehicles: VehiclesState;
+};
+
 export type FetchAllResponse = {
   items: Vehicle[];
   total: number;
-}
+};

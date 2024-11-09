@@ -1,4 +1,4 @@
-import { Vehicle } from '../../../types/vehicleTypes';
+import { Vehicle } from '../../../types/campersTypes';
 // import Categories from '../../Categories/Categories';
 import LinkButton from '../../LinkButton/LinkButton';
 import css from './CatalogItem.module.css';

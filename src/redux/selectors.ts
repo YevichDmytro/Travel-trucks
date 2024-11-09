@@ -1,3 +1,4 @@
-import { VehicleSelectorType } from '../types/vehicleTypes';
+import { CampersSelectorType } from '../types/campersTypes';
 
-export const selectVehicles = (state: VehicleSelectorType) => state.vehicles.items;
+export const selectCampers = (state: CampersSelectorType) =>
+  state.campers.items;

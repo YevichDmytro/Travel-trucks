@@ -37,15 +37,15 @@ export type Vehicle = {
   reviews: reviews[];
 };
 
-export type VehiclesState = {
+export type CampersState = {
   total: number;
   items: Vehicle[];
   loading: boolean;
   error: string | null;
 };
 
-export type VehicleSelectorType = {
-  vehicles: VehiclesState;
+export type CampersSelectorType = {
+  campers: CampersState;
 };
 
 export type FetchAllResponse = {

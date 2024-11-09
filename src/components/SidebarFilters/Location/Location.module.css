@@ -1,0 +1,25 @@
+.inputWrapper {
+  position: relative;
+}
+
+.dropdownList {
+  width: fit-content;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownItem {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}

@@ -4,8 +4,8 @@ import { FormFiltersType } from '../types/objFiltersTypes';
 
 axios.defaults.baseURL = 'https://66b1f8e71ca8ad33d4f5f63e.mockapi.io';
 
-export const fetchAllCampers = createAsyncThunk(
-  'campers/fetchAllCampers',
+export const fetchFilteredCampers = createAsyncThunk(
+  'filteredCampers/fetchFilteredCampers',
   async (filters: FormFiltersType, thunkAPI) => {
     const createQueryString = (filters: FormFiltersType) => {
       const stringifiedFilters = Object.entries(filters).reduce(
@@ -19,26 +19,40 @@ export const fetchAllCampers = createAsyncThunk(
 
       return params.toString();
     };
+
     try {
       const response = await axios.get(
         `/campers?${createQueryString(filters)}`
       );
 
       console.log(response.data);
-
       return response.data;
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error) {
         return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue('Unknown error occurred');
+    }
+  }
+);
 
-      console.log(error);
+export const fetchAllCampers = createAsyncThunk(
+  'campers/fetchAllCampers',
+  async (_, thunkAPI) => {
+    try {
+      const response = await axios.get(`/campers`);
+      return response.data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
       return thunkAPI.rejectWithValue('Unknown error occurred');
     }
   }
 );
 
 // export const fetchById = createAsyncThunk(
-//   'vehicles/fetchById',
+//   'campers/fetchById',
 //   async (vehicleId, thunkAPI) => {
 //     try {
 //       const response = await axios.get(`/campers/${vehicleId}`);

@@ -1,33 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchAllCampers } from '../operations';
-import { FetchAllResponse, VehiclesState } from '../../types/vehicleTypes';
+import { FetchAllResponse, CampersState } from '../../types/campersTypes';
 
-const vehiclesInitialState: VehiclesState = {
+const campersInitialState: CampersState = {
   items: [],
   total: 0,
   loading: false,
   error: null,
 };
 
-const pendingHandle = (state: VehiclesState) => {
+const pendingHandle = (state: CampersState) => {
   state.loading = true;
 };
 
-const rejectedHandle = (state: VehiclesState, action: any) => {
+const rejectedHandle = (state: CampersState, action: any) => {
   state.loading = false;
   state.error = action.payload;
 };
 
-const vehiclesSlice = createSlice({
-  name: 'vehicles',
-  initialState: vehiclesInitialState,
+const campersSlice = createSlice({
+  name: 'campers',
+  initialState: campersInitialState,
   reducers: {},
   extraReducers: builder =>
     builder
       .addCase(fetchAllCampers.pending, pendingHandle)
       .addCase(
         fetchAllCampers.fulfilled,
-        (state: VehiclesState, action: PayloadAction<FetchAllResponse>) => {
+        (state: CampersState, action: PayloadAction<FetchAllResponse>) => {
           state.loading = false;
           state.error = null;
           state.items = action.payload.items;
@@ -37,5 +37,5 @@ const vehiclesSlice = createSlice({
       .addCase(fetchAllCampers.rejected, rejectedHandle),
 });
 
-const vehiclesReducer = vehiclesSlice.reducer;
-export default vehiclesReducer;
+const campersReducer = campersSlice.reducer;
+export default campersReducer;

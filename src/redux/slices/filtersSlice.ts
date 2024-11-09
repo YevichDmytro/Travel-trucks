@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllCampers } from '../operations';
+import { fetchFilteredCampers } from '../operations';
 
 interface FiltersState {
   location: string;
@@ -24,11 +24,11 @@ export const filtersSlice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder
-      .addCase(fetchAllCampers.pending, handlePending)
-      .addCase(fetchAllCampers.fulfilled, (state, action) => {
+      .addCase(fetchFilteredCampers.pending, handlePending)
+      .addCase(fetchFilteredCampers.fulfilled, (state, action) => {
         state.location = action.payload;
       })
-      .addCase(fetchAllCampers.rejected, handleError),
+      .addCase(fetchFilteredCampers.rejected, handleError),
 });
 
 export const filtersReducer = filtersSlice.reducer;

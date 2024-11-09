@@ -5,7 +5,7 @@ import Location from './Location/Location';
 import VehicleEquipments from './VehicleEquipments/VehicleEquipments';
 import VehicleTypes from './VehicleTypes/VehicleTypes';
 
-import { fetchAllCampers } from '../../redux/operations';
+import { fetchFilteredCampers } from '../../redux/operations';
 import { AppDispatch } from '../../redux/store';
 import { FormFiltersType } from '../../types/objFiltersTypes';
 
@@ -34,8 +34,8 @@ const SidebarFilters: React.FC = () => {
     if (Array.isArray(values.transmission)) {
       values.transmission = values.transmission[0];
     }
-
-    dispatch(fetchAllCampers(values));
+    console.log(values);
+    dispatch(fetchFilteredCampers(values));
 
     action.resetForm();
   };

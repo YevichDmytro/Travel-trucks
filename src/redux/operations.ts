@@ -1,30 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { FormFiltersType } from '../types/objFiltersTypes';
+import { selectFilters } from './selectors';
 
 axios.defaults.baseURL = 'https://66b1f8e71ca8ad33d4f5f63e.mockapi.io';
 
-export const fetchFilteredCampers = createAsyncThunk(
-  'filteredCampers/fetchFilteredCampers',
-  async (filters: FormFiltersType, thunkAPI) => {
-    const createQueryString = (filters: FormFiltersType) => {
-      const stringifiedFilters = Object.entries(filters).reduce(
-        (acc, [key, value]) => {
-          acc[key] = value !== undefined ? String(value) : '';
-          return acc;
-        },
-        {} as Record<string, string>
-      );
-      const params = new URLSearchParams(stringifiedFilters);
-
-      return params.toString();
-    };
-
+export const fetchAllCampers = createAsyncThunk(
+  'campers/fetchAllCampers',
+  async (_, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `/campers?${createQueryString(filters)}`
-      );
-
+      const response = await axios.get(`/campers`);
       console.log(response.data);
       return response.data;
     } catch (error) {
@@ -36,11 +20,18 @@ export const fetchFilteredCampers = createAsyncThunk(
   }
 );
 
-export const fetchAllCampers = createAsyncThunk(
-  'campers/fetchAllCampers',
+export const fetchCampersByFilters = createAsyncThunk(
+  'filteredCampers/fetchCampersByFilters',
   async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const filters = selectFilters(state);
+    const queryParams = new URLSearchParams(
+      filters as Record<string, string>
+    ).toString();
+
     try {
-      const response = await axios.get(`/campers`);
+      const response = await axios.get(`/campers?${queryParams}`);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       if (error instanceof Error) {

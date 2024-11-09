@@ -1,34 +1,47 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchFilteredCampers } from '../operations';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface FiltersState {
-  location: string;
-}
-
-const filtersInitialState: FiltersState = {
-  location: '',
+export type FiltersState = {
+  location?: string;
+  AC?: boolean;
+  TV?: boolean;
+  water?: boolean;
+  bathroom?: boolean;
+  kitchen?: boolean;
+  refrigerator?: boolean;
+  microwave?: boolean;
+  gas?: boolean;
+  radio?: boolean;
+  transmission?: string;
+  form?: string;
 };
 
-const handlePending = state => {
-  state.loading = true;
-};
+const initialState: FiltersState = {};
 
-const handleError = (state, action) => {
-  state.loading = false;
-  state.error = action.payload;
-};
-
-export const filtersSlice = createSlice({
+const filtersSlice = createSlice({
   name: 'filters',
-  initialState: filtersInitialState,
-  reducers: {},
-  extraReducers: builder =>
-    builder
-      .addCase(fetchFilteredCampers.pending, handlePending)
-      .addCase(fetchFilteredCampers.fulfilled, (state, action) => {
-        state.location = action.payload;
-      })
-      .addCase(fetchFilteredCampers.rejected, handleError),
+  initialState,
+  reducers: {
+    setFilters: (state, action: PayloadAction<FiltersState>) => {
+      state.location = action.payload.location;
+      state.AC = action.payload.AC;
+      state.TV = action.payload.TV;
+      state.water = action.payload.water;
+      state.bathroom = action.payload.bathroom;
+      state.kitchen = action.payload.kitchen;
+      state.refrigerator = action.payload.refrigerator;
+      state.microwave = action.payload.microwave;
+      state.gas = action.payload.gas;
+      state.radio = action.payload.radio;
+      state.transmission = action.payload.transmission;
+      state.form = action.payload.form;
+    },
+    clearFilters: () => {
+      return {};
+    },
+  },
 });
 
-export const filtersReducer = filtersSlice.reducer;
+export const { setFilters, clearFilters } = filtersSlice.actions;
+
+const filtersReducer = filtersSlice.reducer;
+export default filtersReducer;

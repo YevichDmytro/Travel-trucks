@@ -41,8 +41,10 @@ const Location: React.FC = () => {
 
   const handleLocationSelect = (location: string) => {
     setFieldValue('location', location);
-    setFilteredLocations([]);
-    setIsFocused(false);
+    setTimeout(() => {
+      setFilteredLocations([]);
+      setIsFocused(false);
+    }, 300);
   };
 
   const handleBlur = () => {
@@ -52,7 +54,7 @@ const Location: React.FC = () => {
   };
 
   const handleFocus = () => {
-    if (values.location.trim() !== '') {
+    if (values.location !== undefined && values.location.trim() !== '') {
       setFilteredLocations(filterLocations(values.location));
     }
     setIsFocused(true);
@@ -63,7 +65,7 @@ const Location: React.FC = () => {
       <Field
         type='text'
         name='location'
-        value={values.location}
+        value={values.location ?? ''}
         onChange={handleInputChange}
         onBlur={handleBlur}
         onFocus={handleFocus}

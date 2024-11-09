@@ -1,41 +1,47 @@
 import { useDispatch } from 'react-redux';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik } from 'formik';
 
 import Location from './Location/Location';
 import VehicleEquipments from './VehicleEquipments/VehicleEquipments';
 import VehicleTypes from './VehicleTypes/VehicleTypes';
 
-import { fetchFilteredCampers } from '../../redux/operations';
+import { fetchCampersByFilters } from '../../redux/operations';
 import { AppDispatch } from '../../redux/store';
-import { FormFiltersType } from '../../types/objFiltersTypes';
+import { clearFilters, setFilters } from '../../redux/slices/filtersSlice';
+import { clearCampers } from '../../redux/slices/campersSlice';
 
 const SidebarFilters: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const initialValues: FormFiltersType = {
-    transmission: [],
+  const initialValues = {
+    location: '',
     AC: '',
     TV: '',
-    Kitchen: '',
-    Bathroom: '',
-    Microwave: '',
-    Refrigerator: '',
-    Radio: '',
-    Gas: '',
-    Water: '',
-    location: '',
+    water: '',
+    bathroom: '',
+    kitchen: '',
+    refrigerator: '',
+    microwave: '',
+    gas: '',
+    radio: '',
+    transmission: '',
     form: '',
   };
 
-  const handleSubmit = async (
-    values: FormFiltersType,
-    action: FormikHelpers<FormFiltersType>
-  ) => {
+  const handleSubmit = async (values, action) => {
+    const completeValues = {
+      ...initialValues,
+      ...values,
+    };
     if (Array.isArray(values.transmission)) {
       values.transmission = values.transmission[0];
     }
-    console.log(values);
-    dispatch(fetchFilteredCampers(values));
+
+    await dispatch(clearFilters());
+    await dispatch(clearCampers());
+
+    await dispatch(setFilters(completeValues));
+    await dispatch(fetchCampersByFilters());
 
     action.resetForm();
   };

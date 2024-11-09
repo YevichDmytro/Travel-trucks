@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchAllCampers } from '../operations';
+import { fetchAllCampers, fetchCampersByFilters } from '../operations';
 import { FetchAllResponse, CampersState } from '../../types/campersTypes';
 
 const campersInitialState: CampersState = {
@@ -21,7 +21,14 @@ const rejectedHandle = (state: CampersState, action: any) => {
 const campersSlice = createSlice({
   name: 'campers',
   initialState: campersInitialState,
-  reducers: {},
+  reducers: {
+    clearCampers: state => {
+      state.items = [];
+      state.total = 0;
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: builder =>
     builder
       .addCase(fetchAllCampers.pending, pendingHandle)
@@ -34,8 +41,18 @@ const campersSlice = createSlice({
           state.total = action.payload.total;
         }
       )
-      .addCase(fetchAllCampers.rejected, rejectedHandle),
+      .addCase(fetchAllCampers.rejected, rejectedHandle)
+      .addCase(fetchCampersByFilters.pending, pendingHandle)
+      .addCase(fetchCampersByFilters.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.items = action.payload.items;
+        state.total = action.payload.total;
+      })
+      .addCase(fetchCampersByFilters.rejected, rejectedHandle),
 });
+
+export const { clearCampers } = campersSlice.actions;
 
 const campersReducer = campersSlice.reducer;
 export default campersReducer;

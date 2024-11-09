@@ -1,15 +1,14 @@
-export type filtersType = {
-  location?: string;
-  form?: string;
-  engine?: string;
-  transmission?: string;
-  AC?: boolean;
-  TV?: boolean;
-  water?: boolean;
-  bathroom?: boolean;
-  kitchen?: boolean;
-  refrigerator?: boolean;
-  microwave?: boolean;
-  gas?: boolean;
-  radio?: boolean;
+export type FormFiltersType = {
+  transmission: string[] | string;
+  AC: string;
+  TV: string;
+  Kitchen: string;
+  Bathroom: string;
+  Microwave: string;
+  Refrigerator: string;
+  Radio: string;
+  Gas: string;
+  Water: string;
+  location: string;
+  form: string;
 };

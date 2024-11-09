@@ -6,7 +6,11 @@ interface BtnProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   newClassName?: string;
 }
 
-const Button = ({ children = 'Search', newClassName, ...props }: BtnProps) => {
+const Button: React.FC = ({
+  children = 'Search',
+  newClassName,
+  ...props
+}: BtnProps) => {
   return (
     <button className={clsx(css.button, newClassName)} {...props}>
       {children}

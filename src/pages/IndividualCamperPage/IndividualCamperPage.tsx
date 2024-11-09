@@ -1,6 +1,6 @@
-import css from './IndividualCamperPage.module.css';
+// import css from './IndividualCamperPage.module.css';
 
-const IndividualCamperPage = () => {
+const IndividualCamperPage: React.FC = () => {
   return <div>IndividualCamperPage</div>;
 };
 

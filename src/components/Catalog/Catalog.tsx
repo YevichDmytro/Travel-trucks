@@ -4,7 +4,7 @@ import CatalogItem from './CatalogItem/CatalogItem';
 import { Vehicle } from '../../types/vehicleTypes';
 // import css from './Catalog.module.css';
 
-const Catalog = () => {
+const Catalog: React.FC = () => {
   const visibleItems = useSelector(selectVehicles);
 
   return (

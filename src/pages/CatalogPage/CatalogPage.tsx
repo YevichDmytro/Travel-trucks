@@ -1,8 +1,8 @@
 // import Catalog from '../../components/Catalog/Catalog';
-import SidebarFilters from '../../components/SidebarFilters/sidebarFilters';
+import SidebarFilters from '../../components/SidebarFilters/SidebarFilters';
 import css from './CatalogPage.module.css';
 
-const CatalogPage = () => {
+const CatalogPage: React.FC = () => {
   return (
     <div className={css.wrapper}>
       <SidebarFilters />

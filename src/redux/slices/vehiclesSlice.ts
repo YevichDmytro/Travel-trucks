@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchAll } from '../operations';
+import { fetchAllCampers } from '../operations';
 import { FetchAllResponse, VehiclesState } from '../../types/vehicleTypes';
 
 const vehiclesInitialState: VehiclesState = {
@@ -24,9 +24,9 @@ const vehiclesSlice = createSlice({
   reducers: {},
   extraReducers: builder =>
     builder
-      .addCase(fetchAll.pending, pendingHandle)
+      .addCase(fetchAllCampers.pending, pendingHandle)
       .addCase(
-        fetchAll.fulfilled,
+        fetchAllCampers.fulfilled,
         (state: VehiclesState, action: PayloadAction<FetchAllResponse>) => {
           state.loading = false;
           state.error = null;
@@ -34,7 +34,7 @@ const vehiclesSlice = createSlice({
           state.total = action.payload.total;
         }
       )
-      .addCase(fetchAll.rejected, rejectedHandle),
+      .addCase(fetchAllCampers.rejected, rejectedHandle),
 });
 
 const vehiclesReducer = vehiclesSlice.reducer;

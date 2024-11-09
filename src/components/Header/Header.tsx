@@ -6,7 +6,7 @@ import css from './Header.module.css';
 const buildLinkClass = ({ isActive }: { isActive: boolean }) =>
   clsx(css.link, isActive && css.active);
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <div className={css.headerWrap}>
       <Link to='/'>

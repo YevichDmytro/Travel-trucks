@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import css from './NotFoundPage.module.css';
 
-const NotFoundPage = () => {
+const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
 
   const [count, setCount] = useState(4);

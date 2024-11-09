@@ -1,7 +1,7 @@
 import Hero from '../../components/Hero/Hero';
 // import css from './HomePage.module.css';
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <div>
       <Hero />

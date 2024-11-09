@@ -6,7 +6,7 @@ const vehicleTypes = [
   { label: 'Alcove', value: 'alcove' },
 ];
 
-const VehicleTypes = () => {
+const VehicleTypes: React.FC = () => {
   return (
     <>
       {vehicleTypes.map((type, index) => {

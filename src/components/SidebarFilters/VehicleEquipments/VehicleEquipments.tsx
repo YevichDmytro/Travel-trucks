@@ -13,7 +13,7 @@ const vehicleEquipments = [
   { text: 'Water', name: 'Water' },
 ];
 
-const VehicleEquipments = () => {
+const VehicleEquipments: React.FC = () => {
   return (
     <>
       <p>Filters</p>

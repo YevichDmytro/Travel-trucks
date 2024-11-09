@@ -1,7 +1,7 @@
 import LinkButton from '../LinkButton/LinkButton';
 import css from './Hero.module.css';
 
-const Hero = () => {
+const Hero: React.FC = () => {
   return (
     <div className={css.heroWrap}>
       <div className={css.titleWrap}>

@@ -1,33 +1,42 @@
+import { useDispatch } from 'react-redux';
 import { Form, Formik, FormikHelpers } from 'formik';
+
 import Location from './Location/Location';
 import VehicleEquipments from './VehicleEquipments/VehicleEquipments';
 import VehicleTypes from './VehicleTypes/VehicleTypes';
 
-interface FormValues {
-  transmission: string[] | string;
-  AC: string;
-  TV: string;
-  Kitchen: string;
-  Bathroom: string;
-  Microwave: string;
-  Refrigerator: string;
-  Radio: string;
-  Gas: string;
-  Water: string;
-  location: string;
-  form: string;
-}
+import { fetchAllCampers } from '../../redux/operations';
+import { AppDispatch } from '../../redux/store';
+import { FormFiltersType } from '../../types/objFiltersTypes';
 
-const SidebarFilters = () => {
-  const initialValues: Partial<FormValues> = {};
+const SidebarFilters: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
 
-  const handleSubmit = (
-    values: FormValues,
-    action: FormikHelpers<FormValues>
+  const initialValues: FormFiltersType = {
+    transmission: [],
+    AC: '',
+    TV: '',
+    Kitchen: '',
+    Bathroom: '',
+    Microwave: '',
+    Refrigerator: '',
+    Radio: '',
+    Gas: '',
+    Water: '',
+    location: '',
+    form: '',
+  };
+
+  const handleSubmit = async (
+    values: FormFiltersType,
+    action: FormikHelpers<FormFiltersType>
   ) => {
-    values.transmission = values.transmission[0];
+    if (Array.isArray(values.transmission)) {
+      values.transmission = values.transmission[0];
+    }
 
-    console.log(values);
+    dispatch(fetchAllCampers(values));
+
     action.resetForm();
   };
 

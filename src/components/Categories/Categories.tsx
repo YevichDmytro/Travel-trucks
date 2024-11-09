@@ -1,6 +1,6 @@
 import css from './Categories.module.css';
 
-const Categories = () => {
+const Categories: React.FC = () => {
   return (
     <ul className={css.categoryList}>
       <li className={css.category}>
@@ -70,7 +70,7 @@ const Categories = () => {
         <p>text</p>
       </li>
       <li>
-        <svg width={20} heig className={css.category} ht={20}>
+        <svg width={20} height={20} className={css.category}>
           <use href='/categories/secondSprite.svg#icon-fullyIntegrated'></use>
         </svg>
         <p>text</p>

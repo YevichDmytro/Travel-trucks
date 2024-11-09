@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage.js';
 
-import { fetchAll } from '../../redux/operations.js';
+import { fetchAllCampers } from '../../redux/operations.js';
 import { AppDispatch } from '../../redux/store.js';
 
 const Layout = lazy(() => import('../Layout/Layout.js'));
@@ -16,11 +16,11 @@ const IndividualCamperPage = lazy(
   () => import('../../pages/IndividualCamperPage/IndividualCamperPage.js')
 );
 
-const App = () => {
+const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchAll());
+    dispatch(fetchAllCampers({}));
   }, [dispatch]);
 
   return (

@@ -1,5 +1,5 @@
 import { Vehicle } from '../../../types/vehicleTypes';
-import Categories from '../../Categories/Categories';
+// import Categories from '../../Categories/Categories';
 import LinkButton from '../../LinkButton/LinkButton';
 import css from './CatalogItem.module.css';
 

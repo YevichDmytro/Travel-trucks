@@ -15,7 +15,7 @@ interface CatalogItemProps {
 }
 
 const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
-  const { name, price, location, description, rating, reviews, gallery } = item;
+  const { id, name, price, location, description, rating, reviews, gallery } = item;
 
   const uniqId = () => Math.floor(Math.random() * (300000 - 300 + 1)) + 200;
 
@@ -48,22 +48,22 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
             </svg>
           </div>
           <div className={css.cardInfo}>
-            <p>
+            <div>
               <svg width={16} height={16}>
                 <use href='/ratingIcons/ratingIcons.svg#icon-Property-1Pressed'></use>
               </svg>
-              {ratingInfo(rating, reviews.length)}
-            </p>
-            <p>
+              <p className={css.ratingText}>{ratingInfo(rating, reviews.length)}</p>
+            </div>
+            <div>
               <svg width={16} height={16} aria-hidden='true'>
                 <use href='/categories/secondSprite.svg#icon-map'></use>
               </svg>
-              {location}
-            </p>
+              <p className={css.locationText}>{location}</p>
+            </div>
           </div>
           <p className={css.cardDescription}>{description}</p>
           <Categories item={item} />
-          <LinkButton link='/' newClassName={css.showMoreLink}>
+          <LinkButton link={`/campers/${id}`} newClassName={css.showMoreLink}>
             Show more
           </LinkButton>
         </div>

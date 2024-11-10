@@ -12,8 +12,8 @@ const HomePage = lazy(() => import('../../pages/HomePage/HomePage.js'));
 const CatalogPage = lazy(
   () => import('../../pages/CatalogPage/CatalogPage.js')
 );
-const IndividualCamperPage = lazy(
-  () => import('../../pages/IndividualCamperPage/IndividualCamperPage.js')
+const MoreInfoPage = lazy(
+  () => import('../../pages/MoreInfoPage/MoreInfoPage.js')
 );
 
 const App: React.FC = () => {
@@ -28,8 +28,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path='/catalog' element={<CatalogPage />} />
-          <Route path='/catalog/:id' element={<IndividualCamperPage />} />
+          <Route path='/campers' element={<CatalogPage />} />
+          <Route path='/campers/:id' element={<MoreInfoPage />} />
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>

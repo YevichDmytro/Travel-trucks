@@ -62,7 +62,7 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
           <div className={css.cardTitle}>
             <div className={css.cardTitleWrap}>
               <h2>{name}</h2>
-              <p>{`€${price}.00`}</p>
+              <p>{`€${price.toFixed(2)}`}</p>
             </div>
             <button
               type='button'

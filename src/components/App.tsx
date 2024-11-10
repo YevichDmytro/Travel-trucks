@@ -6,6 +6,7 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.js';
 
 import { fetchAllCampers } from '../redux/operations.js';
 import { AppDispatch } from '../redux/store.js';
+import Loader from './Loader/Loader.js';
 
 const Layout = lazy(() => import('./Layout.js'));
 const HomePage = lazy(() => import('../pages/HomePage/HomePage.js'));
@@ -22,7 +23,7 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader type='routing' />}>
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />

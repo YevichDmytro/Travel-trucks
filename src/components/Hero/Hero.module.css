@@ -1,6 +1,6 @@
 .heroWrap {
   height: 100vh;
-  background-image: url('./public/images/HeroPic-min.png');
+  background-image: url('/images/HeroPic-min.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

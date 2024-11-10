@@ -5,13 +5,11 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage.js';
 import Loader from './Loader/Loader.js';
 
 const Layout = lazy(() => import('./Layout.js'));
-const HomePage = lazy(() => import('../pages/HomePage/HomePage.js'));
+const HomePage = lazy(() => import('../pages/HomePage.js'));
 const CatalogPage = lazy(() => import('../pages/CatalogPage/CatalogPage.js'));
 const MoreInfoPage = lazy(() => import('../pages/DetailsPage/DetailsPage.js'));
 
 const App: React.FC = () => {
-
-
   return (
     <Suspense fallback={<Loader type='routing' />}>
       <Routes>

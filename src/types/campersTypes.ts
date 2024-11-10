@@ -1,5 +1,3 @@
-import { number } from 'yup';
-
 export type gallery = {
   original: string;
   thumb: string;

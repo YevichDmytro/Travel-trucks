@@ -27,6 +27,8 @@ const campersSlice = createSlice({
     clearCampers: state => {
       state.items = [];
       state.total = 0;
+      state.page = 1;
+      state.limit = 4;
       state.loading = false;
       state.error = null;
     },

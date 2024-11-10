@@ -6,6 +6,12 @@ import { Vehicle } from '../../../types/campersTypes';
 import css from './CatalogItem.module.css';
 import { useState } from 'react';
 import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavorites } from '../../../redux/selectors';
+import {
+  addFavorite,
+  removeFavorite,
+} from '../../../redux/slices/favoritesSlice';
 
 interface ImageItem {
   thumb: string;
@@ -19,13 +25,17 @@ interface CatalogItemProps {
 const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
   const { id, name, price, location, description, rating, reviews, gallery } =
     item;
-  const [isPressed, setIsPressed] = useState<boolean>(false);
 
-  const pressedHandle = () => {
-    if (isPressed) {
-      return setIsPressed(false);
+  const dispatch = useDispatch();
+  const favorites = useSelector(selectFavorites); 
+  const isFavorite = favorites.includes(id);
+
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      dispatch(removeFavorite(id)); 
+    } else {
+      dispatch(addFavorite(id));
     }
-    return setIsPressed(true);
   };
 
   const uniqId = () => Math.floor(Math.random() * (300000 - 300 + 1)) + 200;
@@ -56,13 +66,13 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
             </div>
             <button
               type='button'
-              onClick={pressedHandle}
+              onClick={handleToggleFavorite}
               className={css.favoriteIconBtn}
             >
               <svg width={25} height={24}>
                 <use
                   href={`/isFavoriteIcon/isFavoriteIcons.svg#icon-Property-1${clsx(
-                    isPressed ? 'pressed' : 'Default'
+                    isFavorite ? 'pressed' : 'Default'
                   )}`}
                 ></use>
               </svg>

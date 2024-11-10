@@ -1,6 +1,5 @@
 .catalogCard {
-  width: 100%;
-  min-width: 888px;
+  /* max-width: 888px; */
   min-height: 368px;
 
   display: flex;
@@ -16,6 +15,7 @@
 
 .cardImg {
   width: 100%;
+  max-width: 512px;
   height: auto;
   object-fit: cover;
   object-position: center;

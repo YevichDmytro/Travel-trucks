@@ -1,17 +1,17 @@
+import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Categories from '../../Categories/Categories';
 import LinkButton from '../../LinkButton/LinkButton';
 
-import { Vehicle } from '../../../types/campersTypes';
-
-import css from './CatalogItem.module.css';
-import { useState } from 'react';
-import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectFavorites } from '../../../redux/selectors';
 import {
   addFavorite,
   removeFavorite,
 } from '../../../redux/slices/favoritesSlice';
+import { Vehicle } from '../../../types/campersTypes';
+
+import css from './CatalogItem.module.css';
 
 interface ImageItem {
   thumb: string;
@@ -27,12 +27,12 @@ const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
     item;
 
   const dispatch = useDispatch();
-  const favorites = useSelector(selectFavorites); 
+  const favorites = useSelector(selectFavorites);
   const isFavorite = favorites.includes(id);
 
   const handleToggleFavorite = () => {
     if (isFavorite) {
-      dispatch(removeFavorite(id)); 
+      dispatch(removeFavorite(id));
     } else {
       dispatch(addFavorite(id));
     }

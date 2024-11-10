@@ -13,6 +13,7 @@ const Location: React.FC = () => {
 
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isLocationSelected, setLocationSelected] = useState<boolean>(false);
 
   const uniqueLocations = Array.from(
     new Set(locations.map(item => item.location))
@@ -41,20 +42,21 @@ const Location: React.FC = () => {
 
   const handleLocationSelect = (location: string) => {
     setFieldValue('location', location);
-    setTimeout(() => {
-      setFilteredLocations([]);
-      setIsFocused(false);
-    }, 300);
+    setLocationSelected(true);
+
+    setFilteredLocations([]);
+    setIsFocused(false);
   };
 
   const handleBlur = () => {
-    setTimeout(() => {
+    if (isLocationSelected) {
       setIsFocused(false);
-    }, 100);
+    }
   };
 
   const handleFocus = () => {
     if (values.location !== undefined && values.location.trim() !== '') {
+      setLocationSelected(true);
       setFilteredLocations(filterLocations(values.location));
     }
     setIsFocused(true);
@@ -80,7 +82,7 @@ const Location: React.FC = () => {
         <use href='/categories/secondSprite.svg#icon-map'></use>
       </svg>
 
-      {isFocused && filteredLocations.length > 0 && (
+      {(isFocused || isLocationSelected) && filteredLocations.length > 0 && (
         <ul className={css.dropdownList}>
           {filteredLocations.map((location, index) => (
             <li
@@ -98,7 +100,3 @@ const Location: React.FC = () => {
 };
 
 export default Location;
-
-// return items.filter(item =>
-//   item.location.toLowerCase().includes(userLocation.toLowerCase())
-// );

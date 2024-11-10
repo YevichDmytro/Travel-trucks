@@ -1,3 +1,5 @@
+import { number } from 'yup';
+
 export type gallery = {
   original: string;
   thumb: string;
@@ -38,8 +40,9 @@ export type Vehicle = {
 };
 
 export type CampersState = {
-  limit: 4;
-  page: 1;
+  itemById: Vehicle | null;
+  limit: number;
+  page: number;
   total: number;
   items: Vehicle[];
   loading: boolean;

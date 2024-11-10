@@ -1,13 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import Features from '../../components/Features/Features';
 import Gallery from '../../components/Gallery/Gallery';
 import Reviews from '../../components/Reviews/Reviews';
 import BookingForm from '../../components/BookingForm/BookingForm';
 
-// import css from './MoreInfoPage.module.css';
+import { AppDispatch } from '../../redux/store';
+import { fetchCamperById } from '../../redux/operations';
+import { clearCampers } from '../../redux/slices/campersSlice';
 
-const MoreInfoPage: React.FC = () => {
+const Details: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const params = useParams();
+  const camperId = Object.values(params)[0];
+
+  useEffect(() => {
+    dispatch(clearCampers());
+    dispatch(fetchCamperById(camperId));
+  }, [dispatch, camperId]);
+
   const [selectedComponent, setSelectedComponent] = useState<
     'features' | 'reviews'
   >('features');
@@ -55,4 +68,4 @@ const MoreInfoPage: React.FC = () => {
   );
 };
 
-export default MoreInfoPage;
+export default Details;

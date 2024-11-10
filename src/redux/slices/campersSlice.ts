@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchAllCampers, fetchCampersByFilters } from '../operations';
+import {
+  fetchAllCampers,
+  fetchCamperById,
+  fetchCampersByFilters,
+} from '../operations';
 import { FetchAllResponse, CampersState } from '../../types/campersTypes';
 
 const campersInitialState: CampersState = {
+  itemById: null,
   items: [],
   total: 0,
   limit: 4,
@@ -12,9 +17,11 @@ const campersInitialState: CampersState = {
 };
 
 const pendingHandle = (state: CampersState) => {
+  state.error = null;
   state.loading = true;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const rejectedHandle = (state: CampersState, action: any) => {
   state.loading = false;
   state.error = action.payload;
@@ -56,7 +63,14 @@ const campersSlice = createSlice({
         state.items = [...state.items, ...action.payload.items];
         state.total = action.payload.total;
       })
-      .addCase(fetchCampersByFilters.rejected, rejectedHandle),
+      .addCase(fetchCampersByFilters.rejected, rejectedHandle)
+      .addCase(fetchCamperById.pending, pendingHandle)
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.itemById = action.payload;
+      })
+      .addCase(fetchCamperById.rejected, rejectedHandle),
 });
 
 export const { clearCampers, setCurrentPage } = campersSlice.actions;

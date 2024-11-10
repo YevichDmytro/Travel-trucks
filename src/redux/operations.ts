@@ -29,7 +29,7 @@ export const fetchCampersByFilters = createAsyncThunk(
   'campers/fetchCampersByFilters',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    
+
     const filters = selectFilters(state);
     const currPage = selectCurrentPage(state);
     const perPage = selectLimitItems(state);
@@ -55,6 +55,22 @@ export const fetchCampersByFilters = createAsyncThunk(
         `/campers?${paginationParams}&${filterParams}`
       );
 
+      return response.data;
+    } catch (error) {
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+      return thunkAPI.rejectWithValue('Unknown error occurred');
+    }
+  }
+);
+
+export const fetchCamperById = createAsyncThunk(
+  'campers/fetchCamperById',
+  async (id: string | undefined, thunkAPI) => {
+    try {
+      const response = await axios.get(`/campers/${id}`);
+      console.log('byId', response.data);
       return response.data;
     } catch (error) {
       if (error instanceof Error) {

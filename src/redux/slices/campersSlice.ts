@@ -35,9 +35,6 @@ const campersSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.page = action.payload;
     },
-    setLimitItems: (state, action) => {
-      state.limit = action.payload;
-    },
   },
   extraReducers: builder =>
     builder
@@ -62,8 +59,7 @@ const campersSlice = createSlice({
       .addCase(fetchCampersByFilters.rejected, rejectedHandle),
 });
 
-export const { clearCampers, setCurrentPage, setLimitItems } =
-  campersSlice.actions;
+export const { clearCampers, setCurrentPage } = campersSlice.actions;
 
 const campersReducer = campersSlice.reducer;
 export default campersReducer;

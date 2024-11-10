@@ -8,7 +8,7 @@ const Hero: React.FC = () => {
       <div className={css.titleWrap}>
         <h1>Campers of your dreams</h1>
         <h2>You can find everything you want in our catalog</h2>
-        <LinkButton link='/catalog' newClassName={css.heroLink}>
+        <LinkButton link='/campers' newClassName={css.heroLink}>
           View Now
         </LinkButton>
       </div>

@@ -12,10 +12,7 @@ export const fetchAllCampers = createAsyncThunk(
   'campers/fetchAllCampers',
   async (_, thunkAPI) => {
     try {
-      // const paginationObj = { page: 1, limit: 4 };
-      // const pagination = new URLSearchParams(paginationObj).toString();
-
-      const response = await axios.get(`/campers`);
+      const response = await axios.get(`/campers?page=1&limit=4`);
 
       return response.data;
     } catch (error) {

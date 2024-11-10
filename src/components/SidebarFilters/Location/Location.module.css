@@ -1,5 +1,50 @@
 .inputWrapper {
   position: relative;
+  max-width: 360px;
+  margin-bottom: 40px;
+}
+
+.inputLabel,
+.textInput {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--main);
+}
+
+.inputLabel {
+  color: var(--gray);
+}
+
+.textInput {
+  margin-top: 8px;
+
+  border-radius: 12px;
+  border: transparent;
+  padding: 18px 20px 18px 48px;
+  width: 360px;
+  height: 56px;
+  background-color: var(--inputs);
+
+  &:focus {
+    border: transparent;
+    outline: transparent;
+  }
+}
+
+.mapIcon {
+  position: absolute;
+  left: 20px;
+  bottom: 18px;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  fill: var(--gray);
+}
+
+.textInput:focus-within + .mapIcon,
+.textInput:not(:placeholder-shown) + .mapIcon {
+  fill: var(--main);
 }
 
 .dropdownList {

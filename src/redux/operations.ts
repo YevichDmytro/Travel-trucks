@@ -9,7 +9,7 @@ export const fetchAllCampers = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await axios.get(`/campers`);
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       if (error instanceof Error) {
@@ -31,7 +31,7 @@ export const fetchCampersByFilters = createAsyncThunk(
 
     try {
       const response = await axios.get(`/campers?${queryParams}`);
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       if (error instanceof Error) {

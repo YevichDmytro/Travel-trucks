@@ -1,32 +1,9 @@
-import { Vehicle } from '../../../types/campersTypes';
-// import Categories from '../../Categories/Categories';
 import LinkButton from '../../LinkButton/LinkButton';
+
 import css from './CatalogItem.module.css';
 
-interface CatalogItemProps {
-  item: Vehicle;
-}
 
-const CatalogItem = ({ item }: CatalogItemProps) => {
-  // const {
-  //   form,
-  //   engine,
-  //   AC,
-  //   TV,
-  //   water,
-  //   bathroom,
-  //   kitchen,
-  //   refrigerator,
-  //   microwave,
-  //   gas,
-  //   radio,
-  //   consumption,
-  //   transmission,
-  //   tank,
-  //   width,
-  //   height,
-  //   length,
-  // } = item;
+const CatalogItem = ({ item }) => {
   const { name, price, location, description, rating, reviews, gallery } = item;
 
   const ratingInfo = (rating: number, reviewsCount: number) =>
@@ -38,12 +15,13 @@ const CatalogItem = ({ item }: CatalogItemProps) => {
     <>
       <li className={css.catalogCard}>
         {gallery
-          .filter((_, index) => index === 0)
-          .map(image => (
+          .filter((_, index: number) => index === 0)
+          .map((image, index: number) => (
             <img
               src={image.original}
               alt='Truck for camping'
               className={css.cardImg}
+              key={index}
             />
           ))}
         <div className={css.cardContent}>

@@ -10,6 +10,8 @@ import { AppDispatch } from '../../redux/store';
 import { clearFilters, setFilters } from '../../redux/slices/filtersSlice';
 import { clearCampers } from '../../redux/slices/campersSlice';
 
+import css from './SidebarFilters.module.css';
+
 const SidebarFilters: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
@@ -37,6 +39,9 @@ const SidebarFilters: React.FC = () => {
       values.transmission = values.transmission[0];
     }
 
+    console.log('values', values);
+    console.log('completeValues', completeValues);
+
     await dispatch(clearFilters());
     await dispatch(clearCampers());
 
@@ -47,13 +52,16 @@ const SidebarFilters: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={css.sidebarWrapper}>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
           <Location />
+          <p className={css.textForm}>Filters</p>
           <VehicleEquipments />
           <VehicleTypes />
-          <button type='submit'>Submit</button>
+          <button className={css.submitBtn} type='submit'>
+            Submit
+          </button>
         </Form>
       </Formik>
     </div>

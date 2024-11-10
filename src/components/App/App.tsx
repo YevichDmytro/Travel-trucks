@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchAllCampers({}));
+    dispatch(fetchAllCampers());
   }, [dispatch]);
 
   return (

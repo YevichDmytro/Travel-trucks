@@ -5,6 +5,8 @@ import { FetchAllResponse, CampersState } from '../../types/campersTypes';
 const campersInitialState: CampersState = {
   items: [],
   total: 0,
+  limit: 4,
+  page: 1,
   loading: false,
   error: null,
 };
@@ -27,6 +29,12 @@ const campersSlice = createSlice({
       state.total = 0;
       state.loading = false;
       state.error = null;
+    },
+    setCurrentPage: (state, action) => {
+      state.page = action.payload;
+    },
+    setLimitItems: (state, action) => {
+      state.limit = action.payload;
     },
   },
   extraReducers: builder =>
@@ -52,7 +60,8 @@ const campersSlice = createSlice({
       .addCase(fetchCampersByFilters.rejected, rejectedHandle),
 });
 
-export const { clearCampers } = campersSlice.actions;
+export const { clearCampers, setCurrentPage, setLimitItems } =
+  campersSlice.actions;
 
 const campersReducer = campersSlice.reducer;
 export default campersReducer;

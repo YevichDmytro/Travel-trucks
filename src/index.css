@@ -53,3 +53,7 @@ img {
 :root {
   --font-family: 'Inter', sans-serif;
 }
+
+:root {
+  --transition: 0.3s ease;
+}

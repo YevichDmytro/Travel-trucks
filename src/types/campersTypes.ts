@@ -38,6 +38,8 @@ export type Vehicle = {
 };
 
 export type CampersState = {
+  limit: 4;
+  page: 1;
   total: number;
   items: Vehicle[];
   loading: boolean;

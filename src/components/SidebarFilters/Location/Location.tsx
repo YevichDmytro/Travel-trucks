@@ -62,7 +62,11 @@ const Location: React.FC = () => {
 
   return (
     <div className={css.inputWrapper}>
+      <label htmlFor='textInput' className={css.inputLabel}>
+        Location
+      </label>
       <Field
+        id='textInput'
         type='text'
         name='location'
         value={values.location ?? ''}
@@ -70,7 +74,11 @@ const Location: React.FC = () => {
         onBlur={handleBlur}
         onFocus={handleFocus}
         placeholder='City'
+        className={css.textInput}
       />
+      <svg width={20} height={20} aria-hidden='true' className={css.mapIcon}>
+        <use href='/categories/secondSprite.svg#icon-map'></use>
+      </svg>
 
       {isFocused && filteredLocations.length > 0 && (
         <ul className={css.dropdownList}>

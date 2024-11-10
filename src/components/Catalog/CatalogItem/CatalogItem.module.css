@@ -1,15 +1,26 @@
 .catalogCard {
-  max-width: 888px;
   width: 100%;
+  min-width: 888px;
+  min-height: 368px;
+
   display: flex;
   flex-direction: row;
   gap: 24px;
+
+  border: 1px solid var(--gray-light);
+  border-radius: 20px;
+  padding: 24px 64px 24px 24px;
+  background-color: var(--white);
+  position: relative;
 }
 
 .cardImg {
-  width: 292px;
-  height: 320px;
-  object-fit: contain;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .cardContent {
@@ -36,6 +47,11 @@
   color: var(--main);
 }
 
+.favoriteIcon {
+  position: absolute;
+  right: 24px;
+}
+
 .cardInfo {
   display: flex;
   align-items: center;
@@ -54,14 +70,14 @@
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
-  line-height: 150%;
+  line-height: 1.5;
   color: var(--main);
 }
 
 .cardDescription {
   color: var(--text);
   display: block;
-  width: 525px;
+  max-width: 458px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

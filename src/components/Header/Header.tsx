@@ -1,6 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+
 import Logo from '/logo/TravelLogo.svg';
+
 import css from './Header.module.css';
 
 const buildLinkClass = ({ isActive }: { isActive: boolean }) =>

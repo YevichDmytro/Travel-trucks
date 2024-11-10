@@ -1,4 +1,5 @@
 import { Field } from 'formik';
+
 import css from './VehicleEquipments.module.css';
 
 const vehicleEquipments = [

@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CatalogItem from './CatalogItem/CatalogItem';
 
+import { AppDispatch } from '../../redux/store';
+import { setCurrentPage } from '../../redux/slices/campersSlice';
+import { fetchCampersByFilters } from '../../redux/operations';
 import {
   selectCampers,
   selectCurrentPage,
@@ -11,12 +14,9 @@ import {
 import { Vehicle } from '../../types/campersTypes';
 
 import css from './Catalog.module.css';
-import { AppDispatch } from '../../redux/store';
-import { setCurrentPage } from '../../redux/slices/campersSlice';
-import { fetchCampersByFilters } from '../../redux/operations';
 
 const Catalog: React.FC = () => {
-  const uniqId = () => Math.floor(Math.random() * (98765 - 432 + 1)) + 198;
+  const uniqId = () => Math.floor(Math.random() * (500000 - 500 + 1)) + 100;
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -25,7 +25,7 @@ const Catalog: React.FC = () => {
   const itemsPerPage = useSelector(selectLimitItems);
   const totalItems = useSelector(selectTotalItems);
 
-  const totalPages = Math.floor(totalItems / itemsPerPage);
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
   const isLastPage = currentPage >= totalPages;
 
   const loadMoreHandle = async () => {
@@ -34,8 +34,8 @@ const Catalog: React.FC = () => {
   };
 
   return (
-    <>
-      <ul>
+    <div className={css.catalogWrapper}>
+      <ul className={css.catalogList}>
         {visibleItems.map((item: Vehicle) => (
           <CatalogItem item={item} key={uniqId()} />
         ))}
@@ -51,7 +51,7 @@ const Catalog: React.FC = () => {
           Load More
         </button>
       )}
-    </>
+    </div>
   );
 };
 

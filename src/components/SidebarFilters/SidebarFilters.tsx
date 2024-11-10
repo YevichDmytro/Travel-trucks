@@ -3,12 +3,12 @@ import { Form, Formik } from 'formik';
 
 import Location from './Location/Location';
 import VehicleEquipments from './VehicleEquipments/VehicleEquipments';
-import VehicleTypes from './VehicleTypes/VehicleTypes';
 
-import { fetchCampersByFilters } from '../../redux/operations';
 import { AppDispatch } from '../../redux/store';
+import { fetchCampersByFilters } from '../../redux/operations';
 import { clearFilters, setFilters } from '../../redux/slices/filtersSlice';
 import { clearCampers } from '../../redux/slices/campersSlice';
+import VehicleTypes from './VehicleTypes/VehicleTypes';
 
 import css from './SidebarFilters.module.css';
 

@@ -1,92 +1,58 @@
+import { Vehicle } from '../../types/campersTypes';
 import css from './Categories.module.css';
 
-const Categories: React.FC = () => {
+interface Category {
+  href: string;
+  text: string;
+}
+
+type CategoriesObj = {
+  [key: string]: Category;
+};
+
+const Categories: React.FC<{ item: Vehicle }> = ({ item }) => {
+  const categoriesObj: CategoriesObj = {
+    AC: { href: '/categories/sprite.svg#icon-wind', text: 'AC' },
+    TV: { href: '/categories/secondSprite.svg#icon-TV', text: 'TV' },
+    transmission: {
+      href: '/categories/sprite.svg#icon-diagram',
+      text: item.transmission === 'automatic' ? 'Automatic' : 'Manual',
+    },
+    bathroom: { href: '/categories/sprite.svg#icon-shower', text: 'Bathroom' },
+    kitchen: { href: '/categories/sprite.svg#icon-cup-hot', text: 'Kitchen' },
+    radio: { href: '/categories/sprite.svg#icon-radios', text: 'Radio' },
+    refrigerator: {
+      href: '/categories/sprite.svg#icon-fridge',
+      text: 'Refrigerator',
+    },
+    microwave: {
+      href: '/categories/sprite.svg#icon-microwave',
+      text: 'Microwave',
+    },
+    gas: { href: '/categories/sprite.svg#icon-gas-stove', text: 'Gas' },
+    water: { href: '/categories/sprite.svg#icon-water', text: 'Water' },
+  };
+
   return (
     <ul className={css.categoryList}>
-      <li className={css.category}>
-        <svg width={20} height={20} className={css.icon}>
-          <use href='/categories/sprite.svg#icon-microwave'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/sprite.svg#icon-shower'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/sprite.svg#icon-fridge'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/sprite.svg#icon-radios'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/sprite.svg#icon-wind'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/sprite.svg#icon-cup-hot'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/sprite.svg#icon-diagram'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/sprite.svg#icon-fuel-pump'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20} className={css.icon}>
-          <use href='/categories/sprite.svg#icon-gas-stove'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20} className={css.icon}>
-          <use href='/categories/sprite.svg#icon-water'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/secondSprite.svg#icon-alcove'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li>
-        <svg width={20} height={20} className={css.category}>
-          <use href='/categories/secondSprite.svg#icon-fullyIntegrated'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/secondSprite.svg#icon-van'></use>
-        </svg>
-        <p>text</p>
-      </li>
-      <li className={css.category}>
-        <svg width={20} height={20}>
-          <use href='/categories/secondSprite.svg#icon-TV'></use>
-        </svg>
-        <p>text</p>
-      </li>
+      {Object.keys(categoriesObj).map(key =>
+        item[key as keyof Vehicle] ? (
+          <li key={key} className={css.category}>
+            <svg
+              width={20}
+              height={20}
+              className={
+                key === 'water' || key === 'microwave' || key === 'gas'
+                  ? css.icon
+                  : undefined
+              }
+            >
+              <use href={categoriesObj[key].href}></use>
+            </svg>
+            <p>{categoriesObj[key].text}</p>
+          </li>
+        ) : null
+      )}
     </ul>
   );
 };

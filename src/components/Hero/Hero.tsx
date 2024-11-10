@@ -1,4 +1,5 @@
 import LinkButton from '../LinkButton/LinkButton';
+
 import css from './Hero.module.css';
 
 const Hero: React.FC = () => {

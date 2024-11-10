@@ -1,10 +1,23 @@
+import Categories from '../../Categories/Categories';
 import LinkButton from '../../LinkButton/LinkButton';
+
+import { Vehicle } from '../../../types/campersTypes';
 
 import css from './CatalogItem.module.css';
 
-const CatalogItem = ({ item }) => {
-  const uniqId = () => Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
+interface ImageItem {
+  thumb: string;
+  original: string;
+}
+
+interface CatalogItemProps {
+  item: Vehicle;
+}
+
+const CatalogItem: React.FC<CatalogItemProps> = ({ item }) => {
   const { name, price, location, description, rating, reviews, gallery } = item;
+
+  const uniqId = () => Math.floor(Math.random() * (300000 - 300 + 1)) + 200;
 
   const ratingInfo = (rating: number, reviewsCount: number) =>
     reviewsCount === 1
@@ -15,10 +28,10 @@ const CatalogItem = ({ item }) => {
     <>
       <li className={css.catalogCard}>
         {gallery
-          .filter((_, index: number) => index === 0)
-          .map((image, index) => (
+          .filter((_: ImageItem, index: number) => index === 0)
+          .map((image: ImageItem) => (
             <img
-              src={image.original}
+              src={image.thumb}
               alt='Truck for camping'
               className={css.cardImg}
               key={uniqId()}
@@ -28,9 +41,9 @@ const CatalogItem = ({ item }) => {
           <div className={css.cardTitle}>
             <div className={css.cardTitleWrap}>
               <h2>{name}</h2>
-              <p>{price}</p>
+              <p>{`€${price}.00`}</p>
             </div>
-            <svg width={25} height={24}>
+            <svg width={25} height={24} className={css.favoriteIcon}>
               <use href='/isFavoriteIcon/isFavoriteIcons.svg#icon-Property-1Default'></use>
             </svg>
           </div>
@@ -49,7 +62,7 @@ const CatalogItem = ({ item }) => {
             </p>
           </div>
           <p className={css.cardDescription}>{description}</p>
-          {/* <Categories/> */}
+          <Categories item={item} />
           <LinkButton link='/' newClassName={css.showMoreLink}>
             Show more
           </LinkButton>

@@ -1,11 +1,8 @@
-.icon {
-  fill: white;
-  stroke: black;
-}
-
 .categoryList {
   display: flex;
+  gap: 8px;
   flex-wrap: wrap;
+  margin-bottom: 24px;
 }
 
 .category {
@@ -22,4 +19,18 @@
   flex-direction: row;
   gap: 8px;
   width: fit-content;
+}
+
+.category > p {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--main);
+}
+
+.icon {
+  fill: white;
+  stroke: black;
 }

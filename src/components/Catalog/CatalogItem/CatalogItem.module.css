@@ -47,7 +47,11 @@
   color: var(--main);
 }
 
-.favoriteIcon {
+.favoriteIconBtn {
+  background: transparent;
+  border: transparent;
+  padding: 0;
+
   position: absolute;
   right: 24px;
 }

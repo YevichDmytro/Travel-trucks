@@ -9,3 +9,5 @@ export const selectFilters = (state: RootState) => state.filters;
 export const selectCurrentPage = state => state.campers.page;
 
 export const selectLimitItems = state => state.campers.limit;
+
+export const selectTotalItems = state => state.campers.total;

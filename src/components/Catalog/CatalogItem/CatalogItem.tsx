@@ -2,8 +2,8 @@ import LinkButton from '../../LinkButton/LinkButton';
 
 import css from './CatalogItem.module.css';
 
-
 const CatalogItem = ({ item }) => {
+  const uniqId = () => Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
   const { name, price, location, description, rating, reviews, gallery } = item;
 
   const ratingInfo = (rating: number, reviewsCount: number) =>
@@ -16,12 +16,12 @@ const CatalogItem = ({ item }) => {
       <li className={css.catalogCard}>
         {gallery
           .filter((_, index: number) => index === 0)
-          .map((image, index: number) => (
+          .map((image, index) => (
             <img
               src={image.original}
               alt='Truck for camping'
               className={css.cardImg}
-              key={index}
+              key={uniqId()}
             />
           ))}
         <div className={css.cardContent}>

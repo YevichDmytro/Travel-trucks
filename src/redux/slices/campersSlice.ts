@@ -54,7 +54,7 @@ const campersSlice = createSlice({
       .addCase(fetchCampersByFilters.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.items = action.payload.items;
+        state.items = [...state.items, ...action.payload.items];
         state.total = action.payload.total;
       })
       .addCase(fetchCampersByFilters.rejected, rejectedHandle),

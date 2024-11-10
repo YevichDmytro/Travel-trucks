@@ -39,9 +39,6 @@ const SidebarFilters: React.FC = () => {
       values.transmission = values.transmission[0];
     }
 
-    console.log('values', values);
-    console.log('completeValues', completeValues);
-
     await dispatch(clearFilters());
     await dispatch(clearCampers());
 

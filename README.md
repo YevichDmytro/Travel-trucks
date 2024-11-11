@@ -10,6 +10,7 @@
 - **Favorites**: Ability to add cars to favorites for quick access.
 - **Show More**: By clicking the "Show More" button, users can view all details, photos, and reviews of the car.
 - **Booking Form**: A form to enter personal details for car booking. Currently, the data is not being sent to a manager, but this may be implemented in the future for commercial use.
+- **Favicon**: Has very cool favicon.
 
 ## Technical Implementation
 - **TypeScript + Vite**: Core technologies used for fast and reliable development.
@@ -36,6 +37,7 @@
 - **Обране**: можливість додавати автомобілі до обраного для швидкого доступу.
 - **Розширений перегляд**: натиснувши на кнопку "Show More", користувач може переглянути всі деталі, фотографії та відгуки про автомобіль.
 - **Форма бронювання**: форма для введення особистих даних для бронювання авто. На даний момент дані з форми не відправляються менеджеру, але це може бути реалізовано в майбутньому для комерційного використання.
+- **Favicon**: Має дуже класну фавіконку.
 
 ## Технічна реалізація
 - **TypeScript + Vite**: основні технології, що використовуються для швидкої та надійної розробки.

@@ -2,6 +2,30 @@
   padding: 48px 64px 80px 64px;
 }
 
+.detailsTitle,
+.textRating,
+.textLocation,
+.textPrice,
+.tabsWrapper button {
+  font-family: var(--font-family);
+  color: var(--main);
+}
+
+.textPrice,
+.detailsTitle {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.textRating,
+.textLocation,
+.textDescr {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .mainInfoWrap {
   margin-bottom: 60px;
 }
@@ -57,7 +81,7 @@
 .reviewsLine::after {
   content: '';
   position: absolute;
-  top: 50px;
+  top: 48px;
   left: 0;
   width: 100%;
   height: 1px;
@@ -83,26 +107,4 @@
   gap: 40px;
 }
 
-.detailsTitle,
-.textRating,
-.textLocation,
-.textPrice,
-.tabsWrapper button {
-  font-family: var(--font-family);
-  color: var(--main);
-}
 
-.textPrice,
-.detailsTitle {
-  font-weight: 600;
-  font-size: 24px;
-  line-height: 1.33;
-}
-
-.textRating,
-.textLocation,
-.textDescr {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-}

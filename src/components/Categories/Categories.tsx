@@ -10,13 +10,13 @@ type CategoriesObj = {
   [key: string]: Category;
 };
 
-const Categories: React.FC<{ item: Vehicle }> = ({ item }) => {
+const Categories: React.FC<{ item: Vehicle | null }> = ({ item }) => {
   const categoriesObj: CategoriesObj = {
     AC: { href: '/categories/sprite.svg#icon-wind', text: 'AC' },
     TV: { href: '/categories/secondSprite.svg#icon-TV', text: 'TV' },
     transmission: {
       href: '/categories/sprite.svg#icon-diagram',
-      text: item.transmission === 'automatic' ? 'Automatic' : 'Manual',
+      text: item?.transmission === 'automatic' ? 'Automatic' : 'Manual',
     },
     bathroom: { href: '/categories/sprite.svg#icon-shower', text: 'Bathroom' },
     kitchen: { href: '/categories/sprite.svg#icon-cup-hot', text: 'Kitchen' },
@@ -36,7 +36,7 @@ const Categories: React.FC<{ item: Vehicle }> = ({ item }) => {
   return (
     <ul className={css.categoryList}>
       {Object.keys(categoriesObj).map(key =>
-        item[key as keyof Vehicle] ? (
+        item?.[key as keyof Vehicle] ? (
           <li key={key} className={css.category}>
             <svg
               width={20}

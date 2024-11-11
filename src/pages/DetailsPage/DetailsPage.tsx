@@ -11,19 +11,29 @@ import BookingForm from '../../components/BookingForm/BookingForm';
 import { AppDispatch } from '../../redux/store';
 import { fetchCamperById } from '../../redux/operations';
 import { clearCampers } from '../../redux/slices/campersSlice';
-import { selectItemById } from '../../redux/selectors';
+import {
+  selectIsError,
+  selectIsLoading,
+  selectItemById,
+} from '../../redux/selectors';
 
 import css from './DetailsPage.module.css';
+import Loader from '../../components/Loader/Loader';
 
-const Details: React.FC = () => {
+const DetailsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+
   const camperById = useSelector(selectItemById);
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
+
   const params = useParams();
-  const camperId = Object.values(params)[0];
 
   const [selectedComponent, setSelectedComponent] = useState<
     'features' | 'reviews'
   >('features');
+
+  const camperId = Object.values(params)[0];
 
   useEffect(() => {
     dispatch(clearCampers());
@@ -32,72 +42,78 @@ const Details: React.FC = () => {
 
   const handleFeaturesClick = () => {
     setSelectedComponent('features');
+
+    dispatch(clearCampers());
+    dispatch(fetchCamperById(camperId));
   };
 
   const handleReviewsClick = () => {
     setSelectedComponent('reviews');
+
+    dispatch(clearCampers());
+    dispatch(fetchCamperById(camperId));
   };
 
-  const ratingInfo = (
-    rating: number | undefined,
-    reviewsCount: number | undefined
-  ) =>
-    reviewsCount === 1
-      ? `${rating} (${reviewsCount} Review)`
-      : `${rating} (${reviewsCount} Reviews)`;
-
   return (
-    <div className={css.wrapper}>
-      <div className={css.mainInfoWrap}>
-        <h2 className={css.detailsTitle}>{camperById?.name}</h2>
-        <div className={css.reviewsAndLocationInfo}>
-          <div className={css.reviewInfoWrap}>
-            <svg width={16} height={16}>
-              <use href='/ratingIcons/ratingIcons.svg#icon-Property-1Pressed'></use>
-            </svg>
-            <p className={css.textRating}>
-              {ratingInfo(camperById?.rating, camperById?.reviews.length)}
-            </p>
+    <>
+      {!isLoading && !isError && (
+        <div className={css.wrapper}>
+          <div className={css.mainInfoWrap}>
+            <h2 className={css.detailsTitle}>{camperById?.name}</h2>
+            <div className={css.reviewsAndLocationInfo}>
+              <div className={css.reviewInfoWrap}>
+                <svg width={16} height={16}>
+                  <use href='/ratingIcons/ratingIcons.svg#icon-Property-1Pressed'></use>
+                </svg>
+                <p className={css.textRating}>
+                  {`${camperById?.rating} ${camperById?.reviews.length} Reviews`}
+                </p>
+              </div>
+              <div className={css.locationInfoWrap}>
+                <svg width={16} height={16} aria-hidden='true'>
+                  <use href='/categories/secondSprite.svg#icon-map'></use>
+                </svg>
+                <p className={css.textLocation}>{camperById?.location}</p>
+              </div>
+            </div>
+            <h2 className={css.textPrice}>{`€${camperById?.price.toFixed(
+              2
+            )}`}</h2>
+            <Gallery gallery={camperById?.gallery} />
+            <p className={css.textDescr}>{camperById?.description}</p>
           </div>
-          <div className={css.locationInfoWrap}>
-            <svg width={16} height={16} aria-hidden='true'>
-              <use href='/categories/secondSprite.svg#icon-map'></use>
-            </svg>
-            <p className={css.textLocation}>{camperById?.location}</p>
+          <div className={css.tabsWrapper}>
+            <button
+              className={clsx({
+                [css.featureLine]: selectedComponent === 'features',
+              })}
+              type='button'
+              onClick={() => handleFeaturesClick()}
+            >
+              Features
+            </button>
+            <button
+              className={clsx({
+                [css.reviewsLine]: selectedComponent === 'reviews',
+              })}
+              type='button'
+              onClick={() => handleReviewsClick()}
+            >
+              Reviews
+            </button>
+            <span className={css.line}></span>
+          </div>
+          <div className={css.infoWrap}>
+            {selectedComponent === 'features' && <Features item={camperById} />}
+            {selectedComponent === 'reviews' && <Reviews item={camperById} />}
+            <BookingForm />
           </div>
         </div>
-        <h2 className={css.textPrice}>{`€${camperById?.price.toFixed(2)}`}</h2>
-        <Gallery gallery={camperById?.gallery} />
-        <p className={css.textDescr}>{camperById?.description}</p>
-      </div>
-      <div className={css.tabsWrapper}>
-        <button
-          className={clsx({
-            [css.featureLine]: selectedComponent === 'features',
-          })}
-          type='button'
-          onClick={() => handleFeaturesClick()}
-        >
-          Features
-        </button>
-        <button
-          className={clsx({
-            [css.reviewsLine]: selectedComponent === 'reviews',
-          })}
-          type='button'
-          onClick={() => handleReviewsClick()}
-        >
-          Reviews
-        </button>
-        <span className={css.line}></span>
-      </div>
-      <div className={css.infoWrap}>
-        {selectedComponent === 'features' && <Features />}
-        {selectedComponent === 'reviews' && <Reviews />}
-        <BookingForm />
-      </div>
-    </div>
+      )}
+      {isLoading && <Loader type='async' />}
+      {isError && <div>Error occurred</div>}
+    </>
   );
 };
 
-export default Details;
+export default DetailsPage;

@@ -55,3 +55,7 @@ export type FetchAllResponse = {
   items: Vehicle[];
   total: number;
 };
+
+export type ItemProps = {
+  item: Vehicle | null;
+}

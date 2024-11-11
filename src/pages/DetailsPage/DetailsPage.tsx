@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import clsx from 'clsx';
 
 import Features from '../../components/Features/Features';
 import Gallery from '../../components/Gallery/Gallery';
@@ -10,20 +11,24 @@ import BookingForm from '../../components/BookingForm/BookingForm';
 import { AppDispatch } from '../../redux/store';
 import { fetchCamperById } from '../../redux/operations';
 import { clearCampers } from '../../redux/slices/campersSlice';
+import { selectItemById } from '../../redux/selectors';
+
+import css from './DetailsPage.module.css';
 
 const Details: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const camperById = useSelector(selectItemById);
   const params = useParams();
   const camperId = Object.values(params)[0];
+
+  const [selectedComponent, setSelectedComponent] = useState<
+    'features' | 'reviews'
+  >('features');
 
   useEffect(() => {
     dispatch(clearCampers());
     dispatch(fetchCamperById(camperId));
   }, [dispatch, camperId]);
-
-  const [selectedComponent, setSelectedComponent] = useState<
-    'features' | 'reviews'
-  >('features');
 
   const handleFeaturesClick = () => {
     setSelectedComponent('features');
@@ -33,37 +38,64 @@ const Details: React.FC = () => {
     setSelectedComponent('reviews');
   };
 
+  const ratingInfo = (
+    rating: number | undefined,
+    reviewsCount: number | undefined
+  ) =>
+    reviewsCount === 1
+      ? `${rating} (${reviewsCount} Review)`
+      : `${rating} (${reviewsCount} Reviews)`;
+
   return (
-    <div>
-      <div>
-        <h2>title</h2>
-        <div>
-          <svg>
-            <use></use>
-          </svg>
-          <p>rating</p>
+    <div className={css.wrapper}>
+      <div className={css.mainInfoWrap}>
+        <h2 className={css.detailsTitle}>{camperById?.name}</h2>
+        <div className={css.reviewsAndLocationInfo}>
+          <div className={css.reviewInfoWrap}>
+            <svg width={16} height={16}>
+              <use href='/ratingIcons/ratingIcons.svg#icon-Property-1Pressed'></use>
+            </svg>
+            <p className={css.textRating}>
+              {ratingInfo(camperById?.rating, camperById?.reviews.length)}
+            </p>
+          </div>
+          <div className={css.locationInfoWrap}>
+            <svg width={16} height={16} aria-hidden='true'>
+              <use href='/categories/secondSprite.svg#icon-map'></use>
+            </svg>
+            <p className={css.textLocation}>{camperById?.location}</p>
+          </div>
         </div>
-        <div>
-          <svg>
-            <use></use>
-          </svg>
-          <p>location</p>
-        </div>
-        <h2>cost</h2>
-        <Gallery />
-        <p></p>
+        <h2 className={css.textPrice}>{`€${camperById?.price.toFixed(2)}`}</h2>
+        <Gallery gallery={camperById?.gallery} />
+        <p className={css.textDescr}>{camperById?.description}</p>
       </div>
-      <div>
-        <button type='button' onClick={() => handleFeaturesClick()}>
+      <div className={css.tabsWrapper}>
+        <button
+          className={clsx({
+            [css.featureLine]: selectedComponent === 'features',
+          })}
+          type='button'
+          onClick={() => handleFeaturesClick()}
+        >
           Features
         </button>
-        <button type='button' onClick={() => handleReviewsClick()}>
+        <button
+          className={clsx({
+            [css.reviewsLine]: selectedComponent === 'reviews',
+          })}
+          type='button'
+          onClick={() => handleReviewsClick()}
+        >
           Reviews
         </button>
+        <span className={css.line}></span>
       </div>
-      {selectedComponent === 'features' && <Features />}
-      {selectedComponent === 'reviews' && <Reviews />}
-      <BookingForm />
+      <div className={css.infoWrap}>
+        {selectedComponent === 'features' && <Features />}
+        {selectedComponent === 'reviews' && <Reviews />}
+        <BookingForm />
+      </div>
     </div>
   );
 };

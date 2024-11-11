@@ -1,7 +1,5 @@
 .catalogCard {
-  /* max-width: 888px; */
   min-height: 368px;
-
   display: flex;
   flex-direction: row;
   gap: 24px;

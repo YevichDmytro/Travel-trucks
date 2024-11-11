@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const [count, setCount] = useState(4);
-  const [word, setWord] = useState('seconds');
+  const [count, setCount] = useState<number>(4);
+  const [word, setWord] = useState<string>('seconds');
 
   useEffect(() => {
     const timer = setInterval(() => {

@@ -19,6 +19,10 @@ export const selectTotalItems = (state: RootState): number =>
 export const selectIsLoading = (state: RootState): boolean =>
   state.campers.loading;
 
-export const selectIsError = (state: RootState): string | null => state.campers.error;
+export const selectIsError = (state: RootState): string | null =>
+  state.campers.error;
 
 export const selectFavorites = (state: RootState) => state.favorites.favorites;
+
+export const selectItemById = (state: CampersSelectorType) =>
+  state.campers.itemById;

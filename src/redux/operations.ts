@@ -70,7 +70,7 @@ export const fetchCamperById = createAsyncThunk(
   async (id: string | undefined, thunkAPI) => {
     try {
       const response = await axios.get(`/campers/${id}`);
-      console.log('byId', response.data);
+
       return response.data;
     } catch (error) {
       if (error instanceof Error) {

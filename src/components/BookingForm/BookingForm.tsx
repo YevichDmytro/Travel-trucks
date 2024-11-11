@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import css from './BookingForm.module.css';
 import toast from 'react-hot-toast';
+import clsx from 'clsx';
 
 interface IFormInputs {
   name: string;
@@ -72,7 +73,7 @@ const BookingForm = () => {
               as='textarea'
               placeholder='Comment'
               name='comment'
-              className={css.input}
+              className={clsx(css.input, css.textarea)}
             />
             <ErrorMessage name='comment' component='p' className={css.error} />
           </div>

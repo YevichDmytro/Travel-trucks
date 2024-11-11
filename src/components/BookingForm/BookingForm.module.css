@@ -18,14 +18,18 @@
 }
 
 .title {
+  font-family: var(--font-family);
   font-weight: 600;
   font-size: 20px;
+  line-height: 1.2;
   margin-bottom: 8px;
 }
 
 .description {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
+  line-height: 1.5;
   color: var(--gray);
   margin-bottom: 24px;
 }
@@ -38,6 +42,19 @@
   border: none;
   outline: none;
   resize: none;
+  height: 51px;
+}
+
+.textarea {
+  height: 118px;
+}
+
+.input::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray);
 }
 
 .button {

@@ -12,6 +12,7 @@ import { AppDispatch } from '../../redux/store';
 
 import css from './CatalogPage.module.css';
 import { clearFilters } from '../../redux/slices/filtersSlice';
+import ShowError from '../../components/ShowError/ShowError';
 
 const CatalogPage: React.FC = () => {
   const isError = useSelector(selectIsError);
@@ -30,7 +31,7 @@ const CatalogPage: React.FC = () => {
       <SidebarFilters />
       {!isLoading && !isError && <Catalog />}
       {isLoading && <Loader type='async' />}
-      {isError && <div>Error occurred</div>}
+      {isError && <ShowError />}
     </div>
   );
 };

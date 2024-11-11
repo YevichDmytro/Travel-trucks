@@ -19,6 +19,7 @@ import {
 
 import css from './DetailsPage.module.css';
 import Loader from '../../components/Loader/Loader';
+import ShowError from '../../components/ShowError/ShowError';
 
 const DetailsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -111,7 +112,7 @@ const DetailsPage: React.FC = () => {
         </div>
       )}
       {isLoading && <Loader type='async' />}
-      {isError && <div>Error occurred</div>}
+      {isError && <ShowError />}
     </>
   );
 };

@@ -7,6 +7,7 @@ import { ItemProps } from '../../types/campersTypes';
 
 import css from './Reviews.module.css';
 import RatingStars from './RatingStars/RatingStars';
+import ShowError from '../ShowError/ShowError';
 
 const Reviews: React.FC<ItemProps> = ({ item }) => {
   const isLoading = useSelector(selectIsLoading);
@@ -37,7 +38,7 @@ const Reviews: React.FC<ItemProps> = ({ item }) => {
         </div>
       )}
       {isLoading && <Loader type='async' />}
-      {isError && <div>Error occurred</div>}
+      {isError && <ShowError />}
     </>
   );
 };

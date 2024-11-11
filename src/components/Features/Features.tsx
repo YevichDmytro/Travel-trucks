@@ -7,6 +7,7 @@ import { selectIsError, selectIsLoading } from '../../redux/selectors';
 
 import css from './Features.module.css';
 import { ItemProps } from '../../types/campersTypes';
+import ShowError from '../ShowError/ShowError';
 
 const Features: React.FC<ItemProps> = ({ item }) => {
   const isLoading = useSelector(selectIsLoading);
@@ -55,7 +56,7 @@ const Features: React.FC<ItemProps> = ({ item }) => {
         </div>
       )}
       {isLoading && <Loader type='async' />}
-      {isError && <div>Error occurred</div>}
+      {isError && <ShowError />}
     </>
   );
 };

@@ -5,8 +5,20 @@
   color: var(--text);
 }
 
+.wrapper {
+  max-width: 631px;
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
 .commentWrap {
   display: flex;
+  gap: 16px;
   margin-bottom: 16px;
 }
 
@@ -28,8 +40,9 @@
 
 .commentHead {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
 }
 
 .name {
@@ -43,9 +56,4 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
-}
-
-.starts {
-  display: flex;
-  gap: 4px;
 }

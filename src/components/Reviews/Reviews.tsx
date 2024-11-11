@@ -6,6 +6,7 @@ import { selectIsError, selectIsLoading } from '../../redux/selectors';
 import { ItemProps } from '../../types/campersTypes';
 
 import css from './Reviews.module.css';
+import RatingStars from './RatingStars/RatingStars';
 
 const Reviews: React.FC<ItemProps> = ({ item }) => {
   const isLoading = useSelector(selectIsLoading);
@@ -14,47 +15,21 @@ const Reviews: React.FC<ItemProps> = ({ item }) => {
   return (
     <>
       {!isLoading && !isError && (
-        <div>
-          <ul>
-            {item?.reviews.map(item => {
+        <div className={css.wrapper}>
+          <ul className={css.list}>
+            {item?.reviews.map((item, index) => {
               return (
-                <li>
+                <li key={index}>
                   <div className={css.commentWrap}>
                     <div className={css.avatar}>
                       {item.reviewer_name.charAt(0).toUpperCase()}
                     </div>
                     <div className={css.commentHead}>
                       <p className={css.name}>{item.reviewer_name}</p>
-                      <ul className={css.starts}>
-                        <li>
-                          <svg>
-                            <use></use>
-                          </svg>
-                        </li>
-                        <li>
-                          <svg>
-                            <use></use>
-                          </svg>
-                        </li>
-                        <li>
-                          <svg>
-                            <use></use>
-                          </svg>
-                        </li>
-                        <li>
-                          <svg>
-                            <use></use>
-                          </svg>
-                        </li>
-                        <li>
-                          <svg>
-                            <use></use>
-                          </svg>
-                        </li>
-                      </ul>
+                      <RatingStars reviewItem={item} />
                     </div>
                   </div>
-                  <p className={css.descr}></p>
+                  <p className={css.descr}>{item.comment}</p>
                 </li>
               );
             })}
